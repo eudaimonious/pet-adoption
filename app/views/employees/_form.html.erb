@@ -20,8 +20,11 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.collection_check_boxes :animal_ids, Animal.all, :id, :name, {},
+  <% cache('all_animals') do %>
+    <%= f.label :animals %><br>
+    <%= f.collection_check_boxes :animal_ids, Animal.order(:name), :id, :name, {},
     {:multiple => true} %>
+  <% end %>
   </div>
   <div class="actions">
     <%= f.submit %>

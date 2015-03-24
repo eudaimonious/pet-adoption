@@ -28,8 +28,11 @@
     <%= f.text_field :color %>
   </div>
   <div class="field">
-    <%= f.collection_check_boxes :employee_ids, Employee.all, :id, :name, {},
+  <% cache('all_employees') do %>
+    <%= f.label :employees %><br>
+    <%= f.collection_check_boxes :employee_ids, Employee.order(:name), :id, :name, {},
     {:multiple => true} %>
+  <% end %>
   </div>
   <div class="actions">
     <%= f.submit %>

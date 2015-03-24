@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+  cache_sweeper :employee_sweeper, :only => [:create, :update, :destroy]
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   # GET /employees
