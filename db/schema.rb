@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 20150113192554) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "animals_employees", id: false, force: :cascade do |t|
+    t.integer "animal_id"
+    t.integer "employee_id"
+  end
+
+  add_index "animals_employees", ["animal_id", "employee_id"], name: "index_animals_employees_on_animal_id_and_employee_id"
+  add_index "animals_employees", ["employee_id"], name: "index_animals_employees_on_employee_id"
+
   create_table "employees", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
