@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+  cache_sweeper :employee_sweeper, :only => [:create, :update, :destroy]
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   # GET /employees
@@ -69,6 +70,6 @@ class EmployeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:name, :email)
+      params.require(:employee).permit(:name, :email, :animal_ids => [])
     end
 end

@@ -1,4 +1,5 @@
 class AnimalsController < ApplicationController
+  cache_sweeper :animal_sweeper, :only => [:create, :update, :destroy]
   before_action :set_animal, only: [:show, :edit, :update, :destroy]
 
   # GET /animals
@@ -28,7 +29,7 @@ class AnimalsController < ApplicationController
 
     respond_to do |format|
       if @animal.save
-        AnimalMailer.new_animal_created_email(@animal, "test@example.com").deliver_now
+        AnimalMailer.new_animal_created_email(@animal, "test@example.com").deliver_later
 
         format.html { redirect_to @animal, notice: 'Animal was successfully created.' }
         format.json { render :show, status: :created, location: @animal }
@@ -71,6 +72,6 @@ class AnimalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def animal_params
-      params.require(:animal).permit(:name, :age, :breed, :color)
+      params.require(:animal).permit(:name, :age, :breed, :color, :employee_ids => [])
     end
 end

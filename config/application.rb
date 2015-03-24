@@ -30,5 +30,7 @@ module RailsTeamCodingExercises
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.cache_store = :mem_cache_store
+    config.autoload_paths << "#{config.root}/app/sweepers"
   end
 end
