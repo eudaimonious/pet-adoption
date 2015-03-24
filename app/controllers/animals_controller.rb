@@ -1,4 +1,5 @@
 class AnimalsController < ApplicationController
+  cache_sweeper :animal_sweeper, :only => [:create, :update, :destroy]
   before_action :set_animal, only: [:show, :edit, :update, :destroy]
 
   # GET /animals
